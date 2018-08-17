@@ -11,10 +11,18 @@
 |
 */
 
+$router->get('/', function () use ($router) {
+    return $router->app->version();
+});
+
 $router->get('/new-app-key', function() {
     return response()->json(['new_app_key' => \Illuminate\Support\Str::random(32)]);
 });
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->group(['prefix' => 'auth'], function ($router) {
+    $router->post('register', ['as' => 'auth.register', 'uses' => 'AuthController@register']);
+    $router->post('login', ['as' => 'auth.login', 'uses' => 'AuthController@login']);
+    $router->post('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@logout']);
+    $router->post('refresh', ['as' => 'auth.refresh', 'uses' => 'AuthController@refresh']);
+    $router->get('me', ['as' => 'auth.me', 'uses' => 'AuthController@me']);
 });
