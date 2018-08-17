@@ -9,5 +9,6 @@
 <p>Included :</p>
 
 - artisan serve
+- artisan tinker
 - artisan route:list
 - nwidart modules <a href="https://nwidart.com/laravel-modules/v2/lumen">[src]</a>
